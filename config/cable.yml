@@ -7,5 +7,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://redistogo:e0af1f946d7c2e033a0ce8046649ef4a@sole.redistogo.com:9082/
+  url: redis://:pd1b35259351ec892f4eeccd655b224e4226e6ae9c313b403990b842a72321497@ec2-174-129-231-50.compute-1.amazonaws.com:14500
   # channel_prefix: rails_project_production
