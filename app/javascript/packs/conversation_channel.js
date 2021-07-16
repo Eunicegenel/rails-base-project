@@ -1,4 +1,6 @@
-import consumer from "./consumer"
+import consumer from "../channels/consumer"
+
+
 
 document.addEventListener('turbolinks:load', () => {
     const conversation_element = document.getElementById('conversation-id');
@@ -14,10 +16,12 @@ document.addEventListener('turbolinks:load', () => {
     consumer.subscriptions.create({ channel: "ConversationChannel", conversation_id: conversation_id }, {
         connected() {
           // Called when the subscription is ready for use on the server
+          console.log('this user is connected');
         },
       
         disconnected() {
-          // Called when the subscription has been terminated by the server
+          // Called when the subscription has been terminated by the server\
+          console.log('this user is disconnected');
         },
       
         received(data) {
