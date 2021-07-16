@@ -110,6 +110,12 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
+  # setting the cable server's URI for production.
+  config.web_socket_server_url = "wss://kalakalph.herokuapp.com/cable"
+
+  # allowing specified request origins
+  config.action_cable.allowed_request_origins = ['https://kalakalph.herokuapp.com', 'http://kalakalph.herokuapp.com']
+
   # Set action mailer to send emails via SMTP
   config.action_mailer.default_url_options = { host: 'https://kalakalph.herokuapp.com/'}
 
