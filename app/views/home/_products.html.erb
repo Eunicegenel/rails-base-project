@@ -1,7 +1,10 @@
 <div class="products">
+  
+  <% if user_signed_in? %>
+    <%= render 'partials/flash' %>
+  <% end %>
 
-  <%= render 'partials/flash' %>
-
+  
   <% @items.each do |t| %>
     <%= link_to item_path(t.id), method: :get do %>
       <div class="items">
@@ -14,6 +17,6 @@
       </div>
     <% end %>
   <% end %>
-
-  <h1><% @items_arr %></h1>
+  
+  <!--<h1><%# @items_arr %></h1>-->
 </div>

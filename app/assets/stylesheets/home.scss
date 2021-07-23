@@ -11,17 +11,18 @@
   margin: auto;
 }
 
+.products-home {
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 .products {
-  // max-width: 65rem;
-  max-width: 1600px;
-  // height: calc(100vh - 66px);
   padding: 1rem;
   display: flex;
   flex-flow: wrap;
   justify-content: center;
   align-items: flex-start;
-
-  // overflow: auto;
+  margin: 0 auto;
 }
 
 .items {
