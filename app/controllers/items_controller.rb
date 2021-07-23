@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @comments = @item.comments.sort_by(&:created_at) unless @item.nil?
 
-    return if current_user.locations.first.nil?
+    return if user_signed_in? && current_user.locations.first.nil?
     return if @item.user.locations.first.nil?
 
     lat1 = current_user.lat
@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
         item.transact_id = nil
       end
     elsif params[:item][:status] == 'traded'
-      new_transact = Transact.create(item_id: params[:id], traded_with: 'chuchu', user2_id: params[:item][:buyer_id]) if params[:item][:status] == 'traded'
+      new_transact = Transact.create(item_id: params[:id], user2_id: params[:item][:buyer_id]) if params[:item][:status] == 'traded'
       item.transact_id = new_transact.id
     end
 

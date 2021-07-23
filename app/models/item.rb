@@ -16,6 +16,17 @@ class Item < ApplicationRecord
     images[img].variant(combine_options: { thumbnail: '300x300^', gravity: 'center', extent: '300x300' })
   end
 
+  def traded_with
+    if transact.reviews.nil?
+      'chuchu'
+    else
+      @review = Review.find_by(transact_id: transact.id, user1_id: nil)
+      @review&.traded_with
+      # change the description to traded_with
+      # add col to reviews table
+    end
+  end
+
   private
 
   def image_type

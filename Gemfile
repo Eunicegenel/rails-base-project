@@ -20,6 +20,7 @@ gem 'devise'
 gem 'mini_magick'
 gem "aws-sdk-s3", require: false
 gem 'hamlit-rails'
+gem "font-awesome-rails"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

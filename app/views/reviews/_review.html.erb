@@ -11,28 +11,40 @@
         <%= form_with scope: :review, url: item_transact_reviews_path(@item.id, @transact.id), local: true do |f| %>          
             <div class="d-flex flex-row">
                 <div class="col-md-6">
-                    <div class="field form-group"> 
+                    <div class="field form-group">
                         <%= f.label "Review for" %>
-                        <%= f.hidden_field :transact_id, value: @transact.id %>
                         <% if current_user == @user1 %>
                             <% review_for = @user2 %>
-                            <%= f.hidden_field :user2_id, value: review_for.id %>
-                            <%= f.select :user2_score, [1, 2, 3, 4, 5], class: "form-control" %>
                         <% elsif current_user == @user2 %>
                             <% review_for = @user1 %>
+                        <% end %>
+                        <input type="text" class="form-control" placeholder="<%= review_for.username %>: <%= @item.name %>" disabled>
+                    </div>
+                </div>
+            
+                <div class="col-md-6">
+                    <div class="field form-group"> 
+                        <%= f.hidden_field :transact_id, value: @transact.id %>
+                        <% if current_user == @user1 %>
+                            <%= f.hidden_field :user2_id, value: review_for.id %>
+                            <%= f.select :user2_score, [1, 2, 3, 4, 5], class: "form-control" %>
+
+                        <% elsif current_user == @user2 %>
                             <%= f.hidden_field :user1_id, value: review_for.id %>
                             <%= f.select :user1_score, [1, 2, 3, 4, 5], class: "form-control" %>
                         <% end %>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-6">
-                    <div class="field form-group">
-                        <input type="text" class="form-control" placeholder="<%= review_for.username %>: <%= @item.name %>" disabled>
-                    </div>
+            <% if current_user == @user1 %>       
+                <div class="field form-group">
+                    <%= f.label :traded_with, 'Traded with' %>
+                    <%= f.text_field :traded_with, autofocus: true, class: "form-control" %>
                 </div>
-            </div>       
-        
+            <% end %>
+            
+
             <div class="field form-group">
                 <%= f.label :description, 'Description' %>
                 <%= f.text_area :description, autofocus: true, class: "form-control" %>

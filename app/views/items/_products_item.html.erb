@@ -30,7 +30,7 @@
         <%= @item.name %>
         <span class="status font-italic text-warning fw-light"><%= status %></span>
       </h4>
-      <% if current_user.locations.first != nil %>
+      <% if current_user && current_user.locations.first != nil %>
         <% if @item.user.locations.first != nil %>
           <div class="distance">
             <%= image_tag("pin.svg", class: "pin") %>

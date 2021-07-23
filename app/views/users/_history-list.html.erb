@@ -19,13 +19,22 @@
           <td>
             <% if current_user == item.user %>
               <% traded_to = User.find(item.transact.user2_id) %>
+              <%# review_given = Review.find_by(transact_id: item.transact.id, user2_id: current_user.id) %>
+              <%# review_received = Review.find_by(transact_id: item.transact.id, user1_id: current_user.id) %>  
             <% else %>
               <% traded_to = item.user %>
+              <%# review_given = Review.find_by(transact_id: item.transact.id) %>
+              <%# review_received = Review.find_by(transact_id: item.transact.id) %>  
             <% end %>
             
-            <%= link_to traded_to.username, user_path(traded_to) %>
+            <div class="d-flex justify-content-around">
+              <%= link_to traded_to.username, user_path(traded_to) %>
+              <%= link_to do %>
+                <%= image_tag 'warning.svg', width: "18"%>
+              <% end %>
+            </div>
           </td>
-          <td><%= item.transact.traded_with %></td>
+          <td><%= item.traded_with %></td>
           <td>
             <%= item.transact.created_at.strftime("%d-%m-%Y %I:%M%p") %>
           </td>
