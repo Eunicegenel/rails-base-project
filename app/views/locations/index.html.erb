@@ -6,6 +6,12 @@
           <div class="card-body">
 
             <h2>Verify Address</h2>
+            <% flash.each do |type, msg| %>
+              <!-- <div class="error"> -->
+              <div class="alert error text-center">
+                <%= msg %>
+              </div>
+            <% end %>
 
             <% if current_user.locations.first == nil %>
               <%= form_with scope: :location, url: locations_path(current_user.id), method: :post, local: true do |f| %>    
@@ -27,16 +33,6 @@
                 <div class="field form-group">
                   <%= f.label 'Nearest Landmark' %> <i>( preferrably big infrastructures like malls, or nationally recognized landmarks )</i> 
                   <%= f.text_field :landmark, autofocus: true, class: "form-control mt-2", placeholder: "Ex. SM North Edsa", required: true %> 
-                </div>
-
-                <div class="field form-group">
-                  <%= f.label 'Latitude' %>
-                  <%= f.text_field :latitude, autofocus: true, class: "form-control", disabled: true, placeholder: "coordinates will display here..." %>
-                </div>
-
-                <div class="field form-group">
-                  <%= f.label 'Longitude' %>
-                  <%= f.text_field :longitude, autofocus: true, class: "form-control", disabled: true, placeholder: "coordinates will display here..." %>
                 </div>
 
                 <div class="actions mt-4">
@@ -63,16 +59,6 @@
                 <div class="field form-group">
                   <%= f.label 'Nearest Landmark' %> <i>( preferrably big infrastructures like malls, or nationally recognized landmarks )</i> 
                   <%= f.text_field :landmark, autofocus: true, class: "form-control mt-2", value: @location.landmark, placeholder: "Ex. SM North Edsa", required: true %>
-                </div>
-
-                <div class="field form-group">
-                  <%= f.label 'Latitude' %>
-                  <%= f.text_field :latitude, autofocus: true, class: "form-control", disabled: true, value: @location.latitude, placeholder: "coordinates will display here..." %>
-                </div>
-
-                <div class="field form-group">
-                  <%= f.label 'Longitude' %>
-                  <%= f.text_field :longitude, autofocus: true, class: "form-control", disabled: true, value: @location.longitude, placeholder: "coordinates will display here..." %>
                 </div>
 
                 <div class="actions mt-4">
