@@ -9,7 +9,7 @@
         <% if message.user.avatar.attached? %>
             <%= image_tag url_for(message.user.thumbnail), size: '35x35', class: classes, alt: 'profile avatar' %>
         <% else %>
-            <% filepath = (current_user.id % 8).to_s + '.svg' %>
+            <% filepath = (current_user.id % 8).to_s + '.png' %>
             <%= image_tag 'default_avatars/' + filepath, size: '35x35', class: classes, alt: 'profile avatar' %>
         <% end %>
 

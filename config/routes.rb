@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     confirmations: 'confirmations'
   }
-
+  root to: 'home#index'
   resources :users do
     member do
       get :confirm_email
@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   resources :locations
 
   get 'users/:id/history' => 'users#history', as: 'user_history'
-  
-  root to: 'home#index'
   
   post '/comments/comment/:id' => 'comments#comment', as: 'comment'
   put '/comments/:id' => 'comments#update', as: 'update_comment'

@@ -55,8 +55,21 @@ class User < ApplicationRecord
     locations.first.longitude
   end
 
-  def items_from_user
-    items = Item.where(status: 'open').sort_by(&:created_at).reverse
+  def item_search_params(search)
+    if search.nil?
+      Item.where(status: 'open').sort_by(&:created_at).reverse
+    else
+      search.where(status: 'open').sort_by(&:created_at).reverse
+    end
+  end
+
+  def find_available_items
+    items = Item.where('user_id not in(?)', id) # item with same user id as current user not displayed
+    items.where(status: 'open').sort_by(&:created_at).reverse if locations.first.nil?
+    # sort items above accdng if unverified current user
+  end
+
+  def items_from_user(input)
     items_arr = []
     nodist_arr = []
 
@@ -64,7 +77,7 @@ class User < ApplicationRecord
     lat1 = lat
     long1 = long
 
-    items.each do |item|
+    item_search_params(input).each do |item|
       if item.user.locations.first.nil?
         nodist_arr.push(item)
         next

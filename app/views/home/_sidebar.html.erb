@@ -1,9 +1,12 @@
 <div class="tmp-sidebar">
   <form class="form-inline">
+    <!-- <%= image_tag 'search.svg', size: '20x20', class: 'mr-4' %>
+    <input class="form-control" type="search" placeholder="Search" aria-label="Search"> -->
     <%= image_tag 'search.svg', size: '20x20', class: 'mr-4' %>
-    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+    <%= search_form_for @q do |f| %>
+      <%= f.search_field :name_cont %>
+    <% end %>
   </form>
-
     <hr>
 
     <ul class="nav-items-container nav nav-pills flex-column mb-auto text-center" role="tablist">
