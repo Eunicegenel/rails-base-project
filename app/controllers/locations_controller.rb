@@ -17,15 +17,15 @@ class LocationsController < ApplicationController
     results4 = Geocoder.search(place.city)
 
     coords = if results1.present?
-                results1.first.coordinates
+               results1.first.coordinates
              elsif results2.present?
-                results2.first.coordinates
+               results2.first.coordinates
              elsif results3.present?
-                results3.first.coordinates
+               results3.first.coordinates
              elsif results4.present?
-                results4.first.coordinates
+               results4.first.coordinates
              else
-                flash[:alert] = "Invalid Address"
+               flash[:alert] = 'Invalid Address'
              end
 
     place.update(latitude: coords[0], longitude: coords[1])
@@ -45,17 +45,17 @@ class LocationsController < ApplicationController
     results4 = Geocoder.search(place.city)
 
     coords = if results1.present?
-                results1.first.coordinates
+               results1.first.coordinates
              elsif results2.present?
-                results2.first.coordinates
+               results2.first.coordinates
              elsif results3.present?
-                results3.first.coordinates
+               results3.first.coordinates
              elsif results4.present?
-                results4.first.coordinates
+               results4.first.coordinates
              else
-                flash[:alert] = "Invalid Address"
-                redirect_to request.referrer
-                return
+               flash[:alert] = 'Invalid Address'
+               redirect_to request.referer
+               return
              end
 
     current_user.locations.first.update(latitude: coords[0], longitude: coords[1])
