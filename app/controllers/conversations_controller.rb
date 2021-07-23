@@ -1,13 +1,13 @@
 class ConversationsController < ApplicationController
   def index
-    @conversations = current_user.conversations
+    @conversations = current_user.conversations.sort_by(&:created_at).reverse
     @q = Item.ransack(params[:q])
   end
 
   def show
     @q = Item.ransack(params[:q])
     @conversation = Conversation.find(params[:id])
-    @conversations = current_user.conversations
+    @conversations = current_user.conversations.sort_by(&:created_at).reverse
   end
 
   def new
