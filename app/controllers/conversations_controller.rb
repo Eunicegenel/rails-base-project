@@ -1,9 +1,11 @@
 class ConversationsController < ApplicationController
   def index
     @conversations = current_user.conversations
+    @q = Item.ransack(params[:q])
   end
 
   def show
+    @q = Item.ransack(params[:q])
     @conversation = Conversation.find(params[:id])
     @conversations = current_user.conversations
   end

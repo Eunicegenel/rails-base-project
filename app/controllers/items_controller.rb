@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   # before_action :authenticate_user!, except: [:index]
 
   def show
+    @q = Item.ransack(params[:q])
     @conversations = current_user.conversations if user_signed_in?
 
     @item = Item.find(params[:id])

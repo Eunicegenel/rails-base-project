@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @conversations = current_user.conversations
+    @q = Item.ransack(params[:q])
   end
 
   def history

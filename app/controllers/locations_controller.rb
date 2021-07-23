@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
   def index
     @location = current_user.locations.last
+    @q = Item.ransack(params[:q])
   end
 
   def create
