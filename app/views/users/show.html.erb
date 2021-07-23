@@ -30,7 +30,11 @@
                   <span class="text-danger"><%= current_user.username %></span>
                 </h3>
                 
-                <h5> <%= current_user.ave_rating.round(2) %> / 5 </h5>
+                
+                <div class="stars-outer">
+                  <div class="stars-inner"></div>
+                </div>
+                <p class="ave-rating"> <%= current_user.ave_rating.round(2) %> / 5 </p>
               </div>
             </div>
             
@@ -152,3 +156,4 @@
     </div><!-- .right-content -->
   </div><!-- .user-dashboard -->
 </section>
+<%= javascript_pack_tag 'user_profile_rating.js' %>
