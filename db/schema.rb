@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_163937) do
+ActiveRecord::Schema.define(version: 2021_07_23_142648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,11 +92,11 @@ ActiveRecord::Schema.define(version: 2021_07_20_163937) do
     t.integer "user2_id"
     t.integer "user1_score"
     t.integer "user2_score"
+    t.string "traded_with"
   end
 
   create_table "transacts", force: :cascade do |t|
     t.integer "item_id"
-    t.string "traded_with"
     t.integer "user2_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
