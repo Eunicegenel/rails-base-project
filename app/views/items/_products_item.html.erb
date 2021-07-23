@@ -41,7 +41,7 @@
       <h6 class="item_description"><%= @item.description %></h6>
 
       <!-- make carousel for item images -->
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -52,7 +52,11 @@
             <% (0...@item.images.count).each do |image| %>
                 <% active = image == 0 ? 'active' : '' %>
                 <div class="carousel-item <%= active %>">
-                    <%= image_tag @item.thumbnail(image), class: "d-block" %>
+                    <%#= image_tag @item.thumbnail(image), class: "d-block" %>
+
+                    <div class="d-flex justify-content-center">
+                      <%= image_tag @item.thumbnail(image) %>
+                    </div>
                 </div>
             <% end %>
         </div>
@@ -73,7 +77,7 @@
         <!-- create conversation form when "Send Message" button is clicked -->
         <% if @item.user.id != current_user.id %>
             <%= form_with scope: :conversation, url: item_conversations_path(@item.id), local: true do |f| %>
-              <% send_msg = 'Send ' + current_user.first_name + ' a Message' %>
+              <% send_msg = 'Send ' + @item.user.username + ' a Message' %>
               <%= f.hidden_field :item_id, value: @item.id %>
               <%= f.hidden_field :user1_id, value: @item.user.id %>
               <%= f.hidden_field :user2_id, value: current_user.id %>
