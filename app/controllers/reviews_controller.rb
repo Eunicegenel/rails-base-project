@@ -38,6 +38,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:transact_id, :user1_id, :user2_id, :user1_score, :user2_score, :description)
+    params.require(:review).permit(:transact_id, :user1_id, :user2_id, :user1_score, :user2_score, :description, :traded_with)
   end
 end
