@@ -1,7 +1,10 @@
+const element = document.getElementById("ave-rating");
+let rating = element.dataset.averating;
 const starTotal = 5;
-let rating = 4.6
+
 const starPercentage = (rating / starTotal) * 100;
 const starPercentageRounded = `${(Math.round(starPercentage))}%`;
-document.querySelector('.stars-inner').style.width = starPercentageRounded; 
+document.querySelector('.stars-inner').style.width = starPercentageRounded;
+console.log(starPercentageRounded) 
 
 
