@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    @q = Item.ransack(params[:q])
     @review = Review.new
     @conversations = current_user.conversations
     @item = Item.find(params[:item_id])
