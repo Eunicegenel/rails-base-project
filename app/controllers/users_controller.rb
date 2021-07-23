@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def history
+    @q = Item.ransack(params[:q])
     @user = User.find(params[:id])
     @conversations = current_user.conversations.sort_by(&:created_at).reverse
     @history_items = @user.history_items
