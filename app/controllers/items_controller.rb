@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
         item.transact_id = nil
       end
     elsif params[:item][:status] == 'traded'
-      new_transact = Transact.create(item_id: params[:id], traded_with: 'chuchu', user2_id: params[:item][:buyer_id]) if params[:item][:status] == 'traded'
+      new_transact = Transact.create(item_id: params[:id], user2_id: params[:item][:buyer_id]) if params[:item][:status] == 'traded'
       item.transact_id = new_transact.id
     end
 
