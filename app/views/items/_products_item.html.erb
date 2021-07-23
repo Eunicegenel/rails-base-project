@@ -5,9 +5,9 @@
   <% if @item != nil %>
     <div class="item">
       <div class="item_details">
-        <h6 class="item_description">
-            <%= link_to @item.user.username, user_path(@item.user) %>
-        </h6>
+        <p class="item_description">
+            <span class="text-muted small">Item posted by</span> <%= link_to @item.user.username, user_path(@item.user) %>
+        </p>
         <% if user_signed_in? %>
           <% if current_user.id === @item.user_id %>
             <div class="dropdown">
@@ -26,10 +26,10 @@
       </div>
     
       <% status = @item.status == 'open' ? '' : "(" + @item.status.capitalize + ")"%>
-      <h5 class="item_name">
+      <h4 class="item_name">
         <%= @item.name %>
         <span class="status font-italic text-warning fw-light"><%= status %></span>
-      </h5>
+      </h4>
       <% if current_user.locations.first != nil %>
         <% if @item.user.locations.first != nil %>
           <div class="distance">
@@ -69,24 +69,32 @@
 
       <!-- showing comments and send message button when user is logged in -->
       <% if user_signed_in? %>
-        <%= form_with scope: :comment, url: comment_path(@item.id), local: true do |f| %>
-          <div class="user_comment">
-            <%= f.text_area :body, autofocus: true, id:"comment_user", class: "comment", placeholder: 'Write a public comment...' %>
-            <%= f.hidden_field :commenter_id, value: current_user.id %>
-            <%= f.submit "Post Comment", class: 'btn btn-primary' %>
-          </div>
-          <%= javascript_pack_tag 'comment.js' %>
-        <% end %>
 
         <!-- create conversation form when "Send Message" button is clicked -->
         <% if @item.user.id != current_user.id %>
             <%= form_with scope: :conversation, url: item_conversations_path(@item.id), local: true do |f| %>
-                <%= f.hidden_field :item_id, value: @item.id %>
-                <%= f.hidden_field :user1_id, value: @item.user.id %>
-                <%= f.hidden_field :user2_id, value: current_user.id %>
-                <%= f.submit "Send Message", class: 'btn btn-primary' %>
+              <% send_msg = 'Send ' + current_user.first_name + ' a Message' %>
+              <%= f.hidden_field :item_id, value: @item.id %>
+              <%= f.hidden_field :user1_id, value: @item.user.id %>
+              <%= f.hidden_field :user2_id, value: current_user.id %>
+              <%= f.submit send_msg, class: 'btn btn-success btn-lg mt-5' %>
             <% end %>
-        <% end %>    
+        <% end %>
+
+        <%= form_with scope: :comment, url: comment_path(@item.id), local: true, class: "form-comment mt-5" do |f| %>
+          <%# <div class="user_comment"> %>
+          <div class="row">
+            <div class="col-md-9 pr-md-0">
+              <%= f.text_area :body, autofocus: true, id:"comment_user", class: "comment", placeholder: 'Write a public comment...' %>
+              <%= f.hidden_field :commenter_id, value: current_user.id %>
+            </div>
+            
+            <div class="col-md-3 align-self-end pl-md-1 pb-md-1">
+              <%= f.submit "Post Comment", class: 'btn btn-primary btn-block' %>
+            </div>
+          </div>
+          <%= javascript_pack_tag 'comment.js' %>
+        <% end %>
       <% end %>
 
       <!-- showing item comments -->

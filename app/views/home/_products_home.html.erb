@@ -1,0 +1,23 @@
+<div class="products-home">
+
+  <% if user_signed_in? %>
+    <%= render 'partials/flash' %>
+  <% end %>
+
+  <div class="products">
+    <% @items.each do |t| %>
+      <%= link_to item_path(t.id), method: :get do %>
+        <div class="items">
+          <% if t.images.attached? %>
+            <%= image_tag t.images[0], class: "itempic" %>
+          <% else %>
+            <%= image_tag "altpic.png", class: "itempic" %>
+          <% end %>
+          <h5 class="item_name"><%= t.name %></h5>
+        </div>
+      <% end %>
+    <% end %>
+
+    <!--<h1><%# @items_arr %></h1>-->
+  </div>
+</div>

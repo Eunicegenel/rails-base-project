@@ -1,10 +1,5 @@
 .products_items {
-  margin-top: 1rem;
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   .item {
     border: 0.1rem solid #c5c8ca;
@@ -12,10 +7,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: auto;
-    width: 40rem;
+    width: 100%;
+    max-width: 40rem;
     padding: 1rem;
-    margin: 0 0.5rem;
+    margin: 0 auto;
   }
 }
 
@@ -36,13 +31,15 @@
   font-size: 1.2rem;
 }
 
+.form-comment {
+  width: 100%;
+}
+
 .comment {
-  margin-top: 1rem;
   background-color: #d9dee0;
   padding: 0.5rem;
-  height: 41px;
-  min-width: 38rem;
-  resize: none;
+  height: 37px;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -52,33 +49,30 @@
 
 .user_comment {
   display: flex;
-  flex-direction: column;
   align-items: flex-end;
   width: 100%;
 }
 
 .comment-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 99.9% 0.1%;
+  padding: 0.5rem 1rem;
+  margin: 0.3rem 0rem;
+
+  .author-content {
+    background-color: #d9dee0;
     width: 100%;
-    display: grid;
-    grid-template-columns: 99.9% 0.1%;
-    padding: 0.5rem 1rem;
-    margin: 0.3rem 0rem;
 
-    .author-content {
-        background-color: #d9dee0;
-        width: 100%;
-
-        .commenter {
-            font-size: 0.9rem;
-        }
-
-        .content {
-            line-height: 1.25;
-        }
+    .commenter {
+      font-size: 0.9rem;
     }
+
+    .content {
+      line-height: 1.25;
+    }
+  }
 }
-
-
 
 .dropdown_btn {
   display: flex;
@@ -93,10 +87,10 @@
 }
 
 .comment-options {
-    height: 0.8rem;
-    position: relative;
-    right: 1.25rem;
-    top: 0.7rem
+  height: 0.8rem;
+  position: relative;
+  right: 1.25rem;
+  top: 0.7rem;
 }
 
 .dropdown-item {
