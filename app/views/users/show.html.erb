@@ -42,21 +42,27 @@
             <div class="profile-rating-carousel">
               <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                  <div class="carousel-item text-center active">
-                    <h5>Rating 1</h5>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex perferendis, eos cupiditate hic aperiam iusto accusantium maiores sint dolores nobis libero facilis, quasi id aspernatur aut obcaecati error sequi temporibus? ...</p>
-                  </div>
-                  <div class="carousel-item text-center">
-                    <h5>Rating 2</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus animi provident natus dolore dignissimos, veniam accusamus fuga dicta assumenda? Repellendus ab, dignissimos pariatur quis nemo fugit animi quo maxime adipisci! ...</p>
-                  </div>
-                  <div class="carousel-item text-center">
-                    <h5>Rating 3</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum provident nobis voluptas aliquam labore ea eaque? Iste, odit inventore id, esse veniam molestias ad maiores corporis velit adipisci saepe animi. ...</p>
-                  </div>
+                  <% unless current_user.top_ratings[0].nil? %>
+                    <div class="carousel-item text-center active">
+                      <q class="font-italic"><%= current_user.top_ratings[0][1] %></q>
+                    </div>
+                  <% end %>
+
+                  <% unless current_user.top_ratings[1].nil? %>
+                    <div class="carousel-item text-center">
+                      <q class="font-italic"><%= current_user.top_ratings[1][1] %></q>
+                    </div>
+                  <% end %>
+
+                  <% unless current_user.top_ratings[2].nil? %>
+                    <div class="carousel-item text-center">
+                      <q class="font-italic"><%= current_user.top_ratings[2][1] %></q>
+                    </div>
+                  <% end %>  
                 </div>
               </div><!-- .carousel .slide -->
             </div><!-- .profile-rating-carousel -->
+
           </div><!-- .profile-info-wrapper -->
         </div><!-- .profile-info -->
 

@@ -96,6 +96,19 @@ class User < ApplicationRecord
     [final_arr, nodist_arr]
   end
 
+  def top_ratings
+    top_comments = []
+    a = Review.where(user1_id: id).to_ary
+    b = Review.where(user2_id: id).to_ary
+    (a + b).each do |entry|
+      score = entry.user1_score || entry.user2_score
+      Review.where(id: entry.id)
+      # score_given_by = entry.user1_id || entry.user2_id
+      top_comments << [score, entry.description]
+    end
+    top_comments.sort.reverse
+  end
+
   private
 
   def avatar_filetype
