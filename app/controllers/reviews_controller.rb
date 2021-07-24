@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
   def new
     @q = Item.ransack(params[:q])
     @review = Review.new
-    @conversations = current_user.conversations.sort_by(&:created_at).reverse
+    @conversations = current_user.conversations
     @item = Item.find(params[:item_id])
     @user1 = @item.user                             # user1 is the item owner ('seller')
     @transact = Transact.find(params[:transact_id])

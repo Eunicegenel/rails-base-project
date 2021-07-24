@@ -3,14 +3,14 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @conversations = current_user.conversations.sort_by(&:created_at).reverse
+    @conversations = current_user.conversations
     @q = Item.ransack(params[:q])
   end
 
   def history
     @q = Item.ransack(params[:q])
     @user = User.find(params[:id])
-    @conversations = current_user.conversations.sort_by(&:created_at).reverse
+    @conversations = current_user.conversations
     @history_items = @user.history_items
   end
 
