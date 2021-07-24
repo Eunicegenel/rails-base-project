@@ -24,10 +24,13 @@
                 </div>
             
                 <div class="col-md-6">
-                    <div class="field form-group"> 
+                    <div class="field form-group">
+                    <div class="pantapal"></div> 
                         <%= f.hidden_field :transact_id, value: @transact.id %>
                         <% if current_user == @user1 %>
                             <%= f.hidden_field :user2_id, value: review_for.id %>
+
+                            
 
                             <div class="review-rating">
                                 <%= f.radio_button :user2_score, 5, class: "star-input", name: "user2_score", id: "user2_score_5" %>

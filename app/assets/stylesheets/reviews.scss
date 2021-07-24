@@ -20,8 +20,10 @@
     display: block;
     cursor: pointer;
     width: 45px;
-    display: none;
+    // display: none;
   }
+
+ 
 
   .star-label::before {
     content: '\f005';
@@ -50,4 +52,14 @@
   .star-input:checked ~ .star-label::after {
     opacity: 1;
   }
+}
+
+.pantapal {
+  position: absolute;
+  z-index: 10;
+  width: 350px;
+  height: 100px;
+  top: 70px;
+  right: 0;
+  background-color: white;
 }
