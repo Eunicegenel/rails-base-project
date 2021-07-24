@@ -21,7 +21,7 @@ class User < ApplicationRecord
     # return all conversations where the current_user is a part of
     a = Conversation.where(user1_id: self)
     b = Conversation.where(user2_id: self)
-    a.or(b).uniq
+    a.or(b).uniq.sort_by(&:created_at).reverse
   end
 
   def thumbnail
@@ -94,6 +94,19 @@ class User < ApplicationRecord
       final_arr.push(Item.find(n[0]))
     end
     [final_arr, nodist_arr]
+  end
+
+  def top_ratings
+    top_comments = []
+    a = Review.where(user1_id: id).to_ary
+    b = Review.where(user2_id: id).to_ary
+    (a + b).each do |entry|
+      score = entry.user1_score || entry.user2_score
+      Review.where(id: entry.id)
+      # score_given_by = entry.user1_id || entry.user2_id
+      top_comments << [score, entry.description]
+    end
+    top_comments.sort.reverse
   end
 
   private
