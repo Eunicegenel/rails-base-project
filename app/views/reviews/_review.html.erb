@@ -8,7 +8,8 @@
     <div class="card-body">
         <h2 class="my-4 mb-lg-5 text-center">Create a review</h2>
         
-        <%= form_with scope: :review, url: item_transact_reviews_path(@item.id, @transact.id), local: true do |f| %>          
+        <%#= form_with scope: :review, url: item_transact_reviews_path(@item.id, @transact.id), local: true do |f| %>
+        <%= form_with url: item_transact_reviews_path(@item.id, @transact.id), local: true do |f| %>          
             <div class="d-flex flex-row">
                 <div class="col-md-6">
                     <div class="field form-group">
@@ -27,11 +28,37 @@
                         <%= f.hidden_field :transact_id, value: @transact.id %>
                         <% if current_user == @user1 %>
                             <%= f.hidden_field :user2_id, value: review_for.id %>
-                            <%= f.select :user2_score, [1, 2, 3, 4, 5], class: "form-control" %>
+
+                            <div class="review-rating">
+                                <%= f.radio_button :user2_score, 5, class: "star-input", name: "user2_score", id: "user2_score_5" %>
+                                    <%= f.label :user2_score_5, class: "star-label" %> 
+                                <%= f.radio_button :user2_score, 4, class: "star-input", name: "user2_score", id: "user2_score_4" %>
+                                    <%= f.label :user2_score_4, class: "star-label" %>
+                                <%= f.radio_button :user2_score, 3, class: "star-input", name: "user2_score", id: "user2_score_3" %>
+                                    <%= f.label :user2_score_3, class: "star-label" %>
+                                <%= f.radio_button :user2_score, 2, class: "star-input", name: "user2_score", id: "user2_score_2" %>
+                                    <%= f.label :user2_score_2, class: "star-label" %>
+                                <%= f.radio_button :user2_score, 1, class: "star-input", name: "user2_score", id: "user2_score_1" %>
+                                    <%= f.label :user2_score_1, class: "star-label" %>
+                            </div>
+                            
 
                         <% elsif current_user == @user2 %>
                             <%= f.hidden_field :user1_id, value: review_for.id %>
-                            <%= f.select :user1_score, [1, 2, 3, 4, 5], class: "form-control" %>
+                            
+                            <div class="review-rating">
+                                <%= f.radio_button :user1_score, 5, class: "star-input", name: "user1_score", id: "user1_score_5" %>
+                                    <%= f.label :user1_score_5, class: "star-label" %> 
+                                <%= f.radio_button :user1_score, 4, class: "star-input", name: "user1_score", id: "user1_score_4" %>
+                                    <%= f.label :user1_score_4, class: "star-label" %>
+                                <%= f.radio_button :user1_score, 3, class: "star-input", name: "user1_score", id: "user1_score_3" %>
+                                    <%= f.label :user1_score_3, class: "star-label" %>
+                                <%= f.radio_button :user1_score, 2, class: "star-input", name: "user1_score", id: "user1_score_2" %>
+                                    <%= f.label :user1_score_2, class: "star-label" %>
+                                <%= f.radio_button :user1_score, 1, class: "star-input", name: "user1_score", id: "user1_score_1" %>
+                                    <%= f.label :user1_score_1, class: "star-label" %>
+                            </div>
+
                         <% end %>
                     </div>
                 </div>
@@ -58,3 +85,4 @@
     </div><!-- card-body -->
   </div><!-- card -->
 </div>
+<%= javascript_pack_tag 'star_rating.js' %>
