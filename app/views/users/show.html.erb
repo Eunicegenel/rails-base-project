@@ -13,50 +13,61 @@
           <div class="profile-info-wrapper">
             <div class="profile-content text-center">
               <div class="profile-image">
-                <% if current_user.avatar.attached? %>
-                  <%= image_tag url_for(current_user.thumbnail), class: "rounded-circle", alt: 'profile image' %>
+                <% if @user.avatar.attached? %>
+                  <%= image_tag url_for(@user.thumbnail), class: "rounded-circle", alt: 'profile image' %>
                 <% else %>
-                  <% filepath = (current_user.id % 8).to_s + '.png' %>
+                  <% filepath = (@user.id % 8).to_s + '.png' %>
                   <%= image_tag 'default_avatars/' + filepath, class: "rounded-circle", alt: 'profile avatar' %>
                 <% end %>
               </div>
 
               <div class="profile-details">
                 <h2 class="fullname">
-                  <%= current_user.first_name %> <%= current_user.last_name %>
+                  <%= @user.first_name %> <%= @user.last_name %>
                 </h2>
 
                 <h3>
-                  <span class="text-danger"><%= current_user.username %></span>
+                  <span class="text-danger"><%= @user.username %></span>
                 </h3>
                 
                 
                 <div class="stars-outer">
                   <div class="stars-inner"></div>
                 </div>
-                <p class="ave-rating" id="ave-rating" data-averating="<%= current_user.ave_rating.round(2) %>"> <%= current_user.ave_rating.round(2) %> / 5 </p>
+                <p class="ave-rating" id="ave-rating" data-averating="<%= @user.ave_rating.round(2) %>"> <%= @user.ave_rating.round(2) %> / 5 </p>
               </div>
             </div>
             
             <!-- RATING COMMENTS -->
-            <div class="profile-rating-carousel">
-              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item text-center active">
-                    <h5>Rating 1</h5>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex perferendis, eos cupiditate hic aperiam iusto accusantium maiores sint dolores nobis libero facilis, quasi id aspernatur aut obcaecati error sequi temporibus? ...</p>
+            <% if @user.ave_rating == 0.0 %>
+              <div class="profile-rating-carousel">
+                <h3 class="text-center">This user currently has no reviews yet.</h3>
+              </div>
+            <% else %>
+              <div class="profile-rating-carousel">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                    <% unless @user.top_ratings[0].nil? %>
+                      <div class="carousel-item text-center active">
+                        <q class="font-italic"><%= @user.top_ratings[0][1] %></q>
+                      </div>
+                    <% end %>
+
+                    <% unless @user.top_ratings[1].nil? %>
+                      <div class="carousel-item text-center">
+                        <q class="font-italic"><%= @user.top_ratings[1][1] %></q>
+                      </div>
+                    <% end %>
+
+                    <% unless @user.top_ratings[2].nil? %>
+                      <div class="carousel-item text-center">
+                        <q class="font-italic"><%= @user.top_ratings[2][1] %></q>
+                      </div>
+                    <% end %>  
                   </div>
-                  <div class="carousel-item text-center">
-                    <h5>Rating 2</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus animi provident natus dolore dignissimos, veniam accusamus fuga dicta assumenda? Repellendus ab, dignissimos pariatur quis nemo fugit animi quo maxime adipisci! ...</p>
-                  </div>
-                  <div class="carousel-item text-center">
-                    <h5>Rating 3</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum provident nobis voluptas aliquam labore ea eaque? Iste, odit inventore id, esse veniam molestias ad maiores corporis velit adipisci saepe animi. ...</p>
-                  </div>
-                </div>
-              </div><!-- .carousel .slide -->
-            </div><!-- .profile-rating-carousel -->
+                </div><!-- .carousel .slide -->
+              </div><!-- .profile-rating-carousel -->
+            <% end %>  
           </div><!-- .profile-info-wrapper -->
         </div><!-- .profile-info -->
 

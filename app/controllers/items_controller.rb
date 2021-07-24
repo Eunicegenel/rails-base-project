@@ -8,7 +8,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @comments = @item.comments.sort_by(&:created_at) unless @item.nil?
 
-    return if user_signed_in? && current_user.locations.first.nil?
+    return unless user_signed_in?
+    return if current_user.locations.first.nil?
     return if @item.user.locations.first.nil?
 
     lat1 = current_user.lat

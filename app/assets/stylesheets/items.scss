@@ -117,3 +117,50 @@
   margin-top: -0.5rem;
   margin-right: 0.5rem;
 }
+
+
+.like-container {
+  position: relative;
+  top: 1rem;
+  right: 4rem;
+  height:auto;
+  margin-right: 2rem;
+
+  .like {
+    cursor:pointer;
+    padding:10px 12px 8px;
+    background:#fff;
+    border-radius:50%;
+    display:inline-block;
+    margin: 0;
+    color:#aaa;
+    transition:.2s;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+                0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+                0 12.5px 10px rgba(0, 0, 0, 0.06);
+  }
+  
+  .like:hover {
+    color:#666;
+  }
+  
+  .like::before {
+    font-family:fontawesome;
+    content:'\f004';
+    font-style:normal;
+  }
+  
+  .like.press {
+    animation: size .4s;
+    color:#e23b3b;
+  }
+  
+  
+  @keyframes size {
+    0% {padding:10px 12px 8px;}
+    50% {padding:14px 16px 12px;  
+          margin-top:-4px;}
+    100% {padding:10px 12px 8px;}
+  }
+}
+

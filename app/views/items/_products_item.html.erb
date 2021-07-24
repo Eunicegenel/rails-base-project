@@ -21,6 +21,10 @@
                 <% end %>
               </div>
             </div>
+          <% else %>
+          <div class="like-container">
+              <i class="like"></i>
+          </div>
           <% end %>
         <% end %>
       </div>
@@ -73,11 +77,10 @@
 
       <!-- showing comments and send message button when user is logged in -->
       <% if user_signed_in? %>
-
         <!-- create conversation form when "Send Message" button is clicked -->
-        <% if @item.user.id != current_user.id %>
+        <% if @item.user.id != current_user.id %> 
             <%= form_with scope: :conversation, url: item_conversations_path(@item.id), local: true do |f| %>
-              <% send_msg = 'Send ' + @item.user.username + ' a Message' %>
+              <% send_msg = 'Message ' + @item.user.username %>
               <%= f.hidden_field :item_id, value: @item.id %>
               <%= f.hidden_field :user1_id, value: @item.user.id %>
               <%= f.hidden_field :user2_id, value: current_user.id %>
@@ -165,3 +168,4 @@
   <% end %>
 <% end %>
 <%= javascript_pack_tag 'image_previewer_edit.js' %>
+<%= javascript_pack_tag 'like_button.js' %>
