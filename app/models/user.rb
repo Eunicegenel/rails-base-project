@@ -21,7 +21,7 @@ class User < ApplicationRecord
     # return all conversations where the current_user is a part of
     a = Conversation.where(user1_id: self)
     b = Conversation.where(user2_id: self)
-    a.or(b).uniq
+    a.or(b).uniq.sort_by(&:created_at).reverse
   end
 
   def thumbnail

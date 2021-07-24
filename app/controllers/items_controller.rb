@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   def show
     @q = Item.ransack(params[:q])
-    @conversations = current_user.conversations.sort_by(&:created_at).reverse if user_signed_in?
+    @conversations = current_user.conversations if user_signed_in?
 
     @item = Item.find(params[:id])
     @comments = @item.comments.sort_by(&:created_at) unless @item.nil?
